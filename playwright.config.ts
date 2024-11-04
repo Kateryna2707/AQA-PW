@@ -38,8 +38,31 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: '*setup/*.ts'
+    },
+    {
+      name: 'preconditions',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: '*api/*.preconditions.spec.ts'
+    },
+    {
+      name: 'smoke',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: '*tests/*.spec.ts',
+      dependencies: ['preconditions']
+    },
+    {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+
+      dependencies: ['setup']
+    },
+    {
+      name: 'api',
+      use: { ...devices['Desktop Chrome'] },
+      testMatch: '*api/*.ts'
     },
 
     // {
